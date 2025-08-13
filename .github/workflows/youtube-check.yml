@@ -1,0 +1,20 @@
+name: Check YouTube Videos
+
+on:
+  schedule:
+    - cron: "*/10 * * * *" # Every 10 minutes
+  workflow_dispatch: # Allow manual runs too
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch YouTube RSS feed
+        run: |
+          echo "Fetching YouTube feed..."
+          curl -s "https://www.youtube.com/feeds/videos.xml?channel_id=YOUR_CHANNEL_ID" -o feed.xml
+
+      - name: Show latest video
+        run: |
+          echo "Latest video info:"
+          grep -E "<title>|<link>" feed.xml | head -n 4
