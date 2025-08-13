@@ -1,0 +1,15 @@
+name: YouTube Webhook Trigger
+
+on:
+  repository_dispatch:
+    types: [youtube_event] # This event type must match your API trigger
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Say hello
+        run: echo "Triggered by YouTube webhook!"
